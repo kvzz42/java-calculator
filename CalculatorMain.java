@@ -22,7 +22,7 @@ public class CalculatorMain
                 "\"help\" to view calculator commands and operations.\n");
         System.out.print(">> ");
         Calculator<String> calc =
-                new InfixCalculator(); // change to test different calculators
+                new PostfixCalculator(); // change to test different calculators
         Scanner console = new Scanner(System.in);
         String input = console.nextLine().trim().replaceAll("[ \t]+", " ");
         while (!input.equalsIgnoreCase("quit")) {
