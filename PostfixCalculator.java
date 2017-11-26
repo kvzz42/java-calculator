@@ -65,10 +65,10 @@ public class PostfixCalculator extends AbstractCalculator
     }
     
     /**
-     * Processes the specified postfix expression using the specified
-     * {@code Deque} as auxiliary storage, returning a success value. If the
-     * parsing is successful, the {@code Deque} will hold exactly one element
-     * (the value of the whole expression).
+     * Processes the specified postfix expression using the specified {@code
+     * Deque} as auxiliary storage, returning a success value. If the parsing
+     * is successful, the {@code Deque} will hold exactly one element (the value
+     * of the whole expression).
      *
      * @param  expression the input expression to evaluate
      * @param  operands   the operand stack

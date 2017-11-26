@@ -11,9 +11,9 @@
 public interface Calculator<T>
 {
     /**
-     * Evaluates and returns the value of the given input expression as a
-     * {@code double}, or {@code Double.NaN} if the expression is invalid or
-     * produces a not-a-number value.
+     * Evaluates and returns the value of the given input expression as a {@code
+     * double}, or {@code Double.NaN} if the expression is invalid or produces a
+     * not-a-number value.
      *
      * @param  expression the input expression to evaluate
      * @return            the value of the specified expression, or
@@ -23,9 +23,9 @@ public interface Calculator<T>
     double evaluate(T expression);
     
     /**
-     * Calculates and returns the mathematical factorial of the specified
-     * {@code double}. If the specified {@code double} is not a whole number or
-     * is negative, returns {@code Double.NaN} instead.
+     * Calculates and returns the mathematical factorial of the specified {@code
+     * double}. If the specified {@code double} is not a whole number or is
+     * negative, returns {@code Double.NaN} instead.
      *
      * @param  n the {@code double} to calculate the factorial of
      * @return   the factorial of {@code n}, or {@code Double.NaN} if {@code n}

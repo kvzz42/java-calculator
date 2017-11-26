@@ -85,10 +85,10 @@ public class InfixCalculator extends AbstractCalculator
     
     /**
      * Processes the specified infix expression into its corresponding postfix
-     * expression using the specified {@code StringBuilder} as output and
-     * {@code Deque} as auxiliary storage. Returns the success value of the
-     * processing. If parsing is successful, {@code output} will hold the
-     * resulting postfix expression.
+     * expression using the specified {@code StringBuilder} as output and {@code
+     * Deque} as auxiliary storage. Returns the success value of the processing.
+     * If parsing is successful, {@code output} will hold the resulting postfix
+     * expression.
      *
      * @param  expression the input expression to evaluate
      * @param  output     the output to build the postfix expression with
@@ -129,8 +129,8 @@ public class InfixCalculator extends AbstractCalculator
     
     /**
      * Returns {@code true} if the specified operator can be pushed into the
-     * operator stack according to precedence and associativity rules;
-     * {@code false} otherwise.
+     * operator stack according to precedence and associativity rules; {@code
+     * false} otherwise.
      *
      * @param  operator  the operator to be pushed
      * @param  operators the operator stack to push the operator onto
