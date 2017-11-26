@@ -82,7 +82,7 @@ public class PostfixCalculator extends AbstractCalculator
             String operator; // declaration simplifies if-else branch structure
             if (tokens.hasNextDouble()) {
                 operands.push(tokens.nextDouble());
-            } else if ((operator = tokens.next()).equalsIgnoreCase("ans")) {
+            } else if ((operator = tokens.next()).equals("ans")) {
                 operands.push(lastAnswer);
             } else if (getUnaryOps().containsKey(operator) &&
                     !operands.isEmpty()) { // unary needs one operand

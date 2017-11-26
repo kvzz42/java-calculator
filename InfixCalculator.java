@@ -106,8 +106,7 @@ public class InfixCalculator extends AbstractCalculator
             if (tokens.hasNextDouble() && numOkay) {
                 output.append(tokens.nextDouble()).append(' ');
                 numOkay = false;
-            } else if ((operator = tokens.next()).equalsIgnoreCase("ans") &&
-                       numOkay) {
+            } else if ((operator = tokens.next()).equals("ans") && numOkay) {
                 output.append(operator).append(' ');
                 numOkay = false;
             } else if (DEFAULT_OP_PRECEDENCES.containsKey(operator)) {

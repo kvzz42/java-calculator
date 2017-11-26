@@ -86,7 +86,7 @@ public class PrefixCalculator extends AbstractCalculator
             // next token not a number, so assumed to be
             // an operator or "ans" (for last answer)
             String operator = tokens.next();
-            if (operator.equalsIgnoreCase("ans")) {
+            if (operator.equals("ans")) {
                 return lastAnswer;
             } else if (getUnaryOps().containsKey(operator)) {
                 return evalUnary(operator, evaluate(tokens));
