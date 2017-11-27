@@ -114,7 +114,7 @@ public class InfixCalculator extends AbstractCalculator
                     output.append(operators.pop()).append(' ');
                 }
                 operators.push(operator);
-                numOkay = true;
+                numOkay = numOkay || getBinaryOps().containsKey(operator);
             } else if (!isLegalParenthesis(operator, operators,
                                            output, numOkay)) {
                 return false; // invalid token
