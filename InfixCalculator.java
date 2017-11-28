@@ -204,4 +204,11 @@ public class InfixCalculator extends AbstractCalculator
     {
         throw new UnsupportedOperationException();
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public String settings()
+    {
+        return "calculator: infix, " + super.settings();
+    }
 }

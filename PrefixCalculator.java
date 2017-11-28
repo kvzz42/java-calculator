@@ -122,4 +122,11 @@ public class PrefixCalculator extends AbstractCalculator
     {
         super.setBinaryOps(binaryOps);
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public String settings()
+    {
+        return "calculator: prefix, " + super.settings();
+    }
 }

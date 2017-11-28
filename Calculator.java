@@ -23,6 +23,13 @@ public interface Calculator<T>
     double evaluate(T expression);
     
     /**
+     * Returns a string representing the relevant settings of this calculator.
+     *
+     * @return a string representing the relevant settings of this calculator
+     */
+    String settings();
+    
+    /**
      * Calculates and returns the mathematical factorial of the specified {@code
      * double}. If the specified {@code double} is not a whole number or is
      * negative, returns {@code Double.NaN} instead.

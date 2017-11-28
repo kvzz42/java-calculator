@@ -50,17 +50,39 @@ public abstract class AbstractCalculator implements Calculator<String>
             Map.entry("^", Math::pow)
         );
     
+    /** The default precision of this calculator. */
+    public static final int DEFAULT_PRECISION = 2;
+    
+    /** Internal constant for allowing different angle units. */
+    private static final Set<String> TRIG_OPS =
+        Set.of("sin", "cos", "tan", "sec", "csc", "cot");
+    
+    /** Internal constant for allowing different angle units. */
+    private static final Set<String> INV_TRIG_OPS =
+        Set.of("asin", "acos", "atan", "asec", "acsc", "acot");
+    
     /** The map from unary operators to their associated functions. */
     private Map<String, DoubleUnaryOperator> unaryOps;
     
     /** The map from binary operators to their associated functions. */
     private Map<String, DoubleBinaryOperator> binaryOps;
     
+    /** The available angle units for this calculator. */
+    public enum AngleUnits { RADIANS, DEGREES }
+    
+    /** The angle units this calculator uses. */
+    private AngleUnits angleUnits;
+    
+    /** The floating point precision of this calculator. */
+    private int precision;
+    
     /** Sole constructor for use by subclasses, if necessary. */
     protected AbstractCalculator()
     {
         unaryOps = DEFAULT_UNARY_OPS;
         binaryOps = DEFAULT_BINARY_OPS;
+        angleUnits = AngleUnits.RADIANS;
+        precision = DEFAULT_PRECISION;
     }
     
     /**
@@ -114,6 +136,54 @@ public abstract class AbstractCalculator implements Calculator<String>
     }
     
     /**
+     * Returns the angle units this calculator is using.
+     *
+     * @return the angle units this calculator is using.
+     */
+    public AngleUnits getAngleUnits()
+    {
+        return angleUnits;
+    }
+    
+    /**
+     * Sets the angle units of this calculator to the parameter.
+     *
+     * @param angleUnits the angle units to set this calculator to
+     */
+    public void setAngleUnits(AngleUnits angleUnits)
+    {
+        this.angleUnits = angleUnits;
+    }
+    
+    /**
+     * Returns the floating point precision of this calculator.
+     *
+     * @return the floating point precision of this calculator
+     */
+    public int getPrecision()
+    {
+        return precision;
+    }
+    
+    /**
+     * Sets the floating point precision of this calculator to the parameter.
+     *
+     * @param precision the desired floating point precision
+     */
+    public void setPrecision(int precision)
+    {
+        this.precision = precision;
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public String settings()
+    {
+        return "angles: " + (angleUnits == AngleUnits.RADIANS ?
+               "radians" : "degrees") + ", precision: " + precision;
+    }
+    
+    /**
      * Evaluates and returns the value of applying the specified unary operator
      * to the specified operand, or {@code Double.NaN} if no such operator is
      * supported.
@@ -126,9 +196,42 @@ public abstract class AbstractCalculator implements Calculator<String>
      */
     protected double evalUnary(String operator, double operand)
     {
-        return unaryOps.containsKey(operator) ?
-               unaryOps.get(operator).applyAsDouble(operand) :
-               Double.NaN;
+        if (unaryOps.containsKey(operator)) {
+            if (TRIG_OPS.contains(operator)) {
+                operand = ensureAngleUnits(operand, angleUnits,
+                                           AngleUnits.RADIANS);
+            }
+            double result = unaryOps.get(operator).applyAsDouble(operand);
+            if (INV_TRIG_OPS.contains(operator)) {
+                result = ensureAngleUnits(result, AngleUnits.RADIANS,
+                                          angleUnits);
+            }
+            return result;
+        }
+        return Double.NaN;
+    }
+    
+    /**
+     * Returns the correct value of the passed angle according to the units of
+     * the passed angle and the units required.
+     *
+     * @param  angle   the angle to ensure
+     * @param  current the units of {@code angle}
+     * @param  needed  the units needed
+     * @return         the correct value of the passed angle according to the
+     *                 units of the passed angle and the units required
+     */
+    private double ensureAngleUnits(double angle, AngleUnits current,
+                                    AngleUnits needed)
+    {
+        if (current == needed) { // nothing to do
+            return angle;
+        } else if (current == AngleUnits.RADIANS) {
+            // angle is in radians, needs to be degrees
+            return Math.toDegrees(angle);
+        } else { // angle is in degrees, needs to be radians
+            return Math.toRadians(angle);
+        }
     }
     
     /**

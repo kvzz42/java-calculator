@@ -122,4 +122,11 @@ public class PostfixCalculator extends AbstractCalculator
     {
         super.setBinaryOps(binaryOps);
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public String settings()
+    {
+        return "calculator: postfix, " + super.settings();
+    }
 }
