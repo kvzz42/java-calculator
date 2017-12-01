@@ -173,7 +173,7 @@ public class InfixCalculator extends AbstractCalculator
         if (operator.equals("(")) {
             operators.push(operator);
             return numOkay;
-        } else if (operator.equals(")")) {
+        } else if (operator.equals(")") && !numOkay) {
             while (!operators.isEmpty() && !operators.peek().equals("(")) {
                 output.append(operators.pop()).append(' ');
             }
